@@ -3,120 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compact Engineering</title>
+    <title>Compact Engineering Solution - Coming Soon</title>
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --primary: #c2294e;
+            --primary-dark: #9e1c3b;
+            --secondary: #4a4a4a;
+            --bg-light: #f8f9fa;
+            --text-dark: #222222;
+            --white: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
         }
+
         body {
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header / Branding */
+        header {
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .logo-img {
+            max-height: 90px;
+            width: auto;
+        }
+
+        .brand-divider {
+            width: 2px;
+            height: 70px;
+            background-color: #ddd;
+        }
+
+        .brand-text h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-text p {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--secondary);
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .badge {
+            background: rgba(194, 41, 78, 0.1);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #111;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
             line-height: 1.6;
         }
-        header {
-            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
-            color: #fff;
-            padding: 60px 20px;
-            text-align: center;
+
+        /* Fixed Countdown Timer */
+        .countdown-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 3rem;
         }
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+
+        .time-box {
+            background: var(--white);
+            width: 90px;
+            height: 95px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-bottom: 4px solid var(--primary);
         }
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+
+        .time-box span.number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
         }
-        .container {
+
+        .time-box span.label {
+            font-size: 0.75rem;
+            color: #777;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Services Section */
+        .services-section {
+            width: 100%;
             max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin-top: 1rem;
         }
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: #0b5ed7;
+
+        .services-section h3 {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 1.5rem;
         }
-        .grid {
+
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
         }
-        .card {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease-in-out;
+
+        .service-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+            border: 1px solid #eee;
+            transition: transform 0.3s ease;
         }
-        .card:hover {
+
+        .service-card:hover {
             transform: translateY(-5px);
         }
-        .card h3 {
-            margin-bottom: 10px;
-            color: #0d6efd;
+
+        .service-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
         }
-        .contact-btn {
-            display: inline-block;
-            background: #0d6efd;
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
+
+        .service-card h4 {
+            font-size: 1.1rem;
+            color: #222;
+            margin-bottom: 8px;
         }
-        .contact-btn:hover {
-            background: #0b5ed7;
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
         }
+
+        /* Footer / Contact Information */
         footer {
+            background: #1e1e1e;
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            text-align: left;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            background: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item div h5 {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin-bottom: 3px;
+            font-weight: 400;
+        }
+
+        .contact-item div p, .contact-item div a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: block;
+        }
+
+        .copyright {
             text-align: center;
-            padding: 20px;
-            background: #e9ecef;
-            margin-top: 50px;
-            font-size: 0.9rem;
-            color: #6c757d;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .brand-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .brand-divider {
+                width: 80px;
+                height: 2px;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .countdown-container {
+                gap: 8px;
+            }
+            .time-box {
+                width: 70px;
+                height: 75px;
+            }
+            .time-box span.number {
+                font-size: 1.6rem;
+            }
+            .footer-container {
+                text-align: center;
+            }
+            .contact-item {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Section -->
     <header>
-        <h1>Compact Engineering</h1>
-        <p>আপনার ইঞ্জিনিয়ারিং ও টেকনোলজি সমাধানের নির্ভরযোগ্য পার্টনার</p>
-    </header>
+        <div class="brand-container">
+            <!-- Brand Logo Graphic -->
+            <svg class="logo-img" viewBox="0 0 200 200" width="90" height="90">
+                <path d="M100,20 L115,20 L120,35 L135,28 L145,40 L135,52 L148,62 L162,58 L168,72 L152,80 L160,95 L175,98 L172,113 L156,113 L158,128 L170,138 L160,150 L146,142 L138,155 L145,168 L132,175 L122,162 L108,170 L108,185 L92,185 L92,170 L78,162 L68,175 L55,168 L62,155 L54,142 L40,150 L30,138 L42,128 L44,113 L28,113 L25,98 L40,95 L48,80 L32,72 L38,58 L52,62 L65,52 L55,40 L65,28 L80,35 Z" fill="#666666"/>
+                <circle cx="100" cy="100" r="65" fill="#f8f9fa"/>
+                <path d="M100,45 C70,45 60,65 60,85 C60,105 75,118 80,128 L120,128 C125,118 140,105 140,85 C140,65 130,45 100,45 Z" fill="url(#bulbGrad)"/>
+                <rect x="82" y="132" width="36" height="8" rx="2" fill="#777777"/>
+                <rect x="85" y="142" width="30" height="6" rx="2" fill="#555555"/>
+                <path d="M88,150 Q100,156 112,150 L108,158 Q100,162 92,158 Z" fill="#333333"/>
+                <path d="M100,60 L100,110 M100,75 L85,65 M100,85 L115,75 M100,95 L85,105" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="85" cy="65" r="4" fill="#ffffff"/>
+                <circle cx="115" cy="75" r="4" fill="#ffffff"/>
+                <circle cx="85" cy="105" r="4" fill="#ffffff"/>
+                <defs>
+                    <linearGradient id="bulbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ff416c" />
+                        <stop offset="100%" stop-color="#c2294e" />
+                    </linearGradient>
+                </defs>
+            </svg>
 
-    <div class="container">
-        <h2 class="section-title">আমাদের সেবাসমূহ</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>ইঞ্জিনিয়ারিং সলিউশন</h3>
-                <p>আধুনিক প্রযুক্তি ও সঠিক পরিকল্পনার মাধ্যমে নিখুঁত ইঞ্জিনিয়ারিং সেবা প্রদান করা হয়।</p>
-            </div>
-            <div class="card">
-                <h3>প্রজেক্ট ম্যানেজমেন্ট</h3>
-                <p>দক্ষ টিমের মাধ্যমে সঠিক সময়ে প্রজেক্টের কাজ সম্পন্ন করার নিশ্চয়তা।</p>
-            </div>
-            <div class="card">
-                <h3>কারিগরি পরামর্শ</h3>
-                <p>আপনার যেকোনো ইঞ্জিনিয়ারিং জটিলতায় অভিজ্ঞদের পরামর্শ সেবা।</p>
+            <div class="brand-divider"></div>
+
+            <div class="brand-text">
+                <h1>COMPACT ENGINEERING SOLUTION</h1>
+                <p>YOUR PRIORITY IS OUR RESPONSIBILITY</p>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div class="container" style="text-align: center; margin-top: 50px;">
-        <h2 class="section-title">যোগাযোগ করুন</h2>
-        <p>আমাদের সাথে যোগাযোগ করতে নিচে বাটনটি ব্যবহার করুন</p>
-        <a href="mailto:info@compactengineering.com" class="contact-btn">ইমেইল করুন</a>
-    </div>
+    <!-- Main Content -->
+    <main>
+        <div class="badge">
+            <i class="fa-solid fa-gears"></i> ওয়েবসাইট তৈরির কাজ চলছে
+        </div>
 
+        <h2 class="hero-title">আমরা খুব শীঘ্রই আসছি!</h2>
+        <p class="hero-subtitle">
+            আমাদের অফিসিয়াল ওয়েবসাইট লঞ্চ করার প্রস্তুতি চলছে। যেকোনো প্রয়োজনে আমাদের সাথে সরাসরি যোগাযোগ করতে পারেন।
+        </p>
+
+        <!-- Fixed Target Countdown Timer -->
+        <div class="countdown-container">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">দিন</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">ঘণ্টা</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">মিনিট</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">সেকেন্ড</span>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section class="services-section">
+            <h3>আমাদের সেবাসমূহ</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-wrench"></i>
+                    <h4>Mechanical Support</h4>
+                    <p>মেকানিক্যাল ইঞ্জিনিয়ারিং সাপোর্ট এবং টেকনিক্যাল কনসালটেশন সার্ভিস।</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-industry"></i>
+                    <h4>SS Fabrication</h4>
+                    <p>এসএস (Stainless Steel) এর পণ্য ও মালামাল প্রস্তুতকরণ এবং কাস্টম মেটাল ফেব্রিকেশন।</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <h4>Engineering Solutions</h4>
+                    <p>ইন্ডাস্ট্রিয়াল সাপোর্ট, মেকানিক্যাল সলিউশন ও ইকুইপমেন্ট মেইনটেন্যান্স।</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer / Contact Info -->
     <footer>
-        <p>&copy; 2026 Compact Engineering. All rights reserved.</p>
+        <div class="footer-container">
+            <!-- Email -->
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <h5>ইমেইল করুন</h5>
+                    <a href="mailto:ilias_sf@yahoo.com">ilias_sf@yahoo.com</a>
+                </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <h5>ফোন নম্বর</h5>
+                    <a href="tel:+8801766667378">+880 1766-667378</a>
+                    <a href="tel:+8801715030146">+880 1715-030146</a>
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="contact-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <h5>ঠিকানা</h5>
+                    <p>House: 430, Road: 30,<br>Mohakhali DOHS, Dhaka-1206.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; COMPACT ENGINEERING SOLUTION. All Rights Reserved.
+        </div>
     </footer>
 
+    <!-- Fixed Countdown Script -->
+    <script>
+        // নির্দিষ্ট টার্গেট ডেট (এখানে ৩১ ডিসেম্বর ২০২৬ ফিক্সড রাখা হয়েছে)
+        const targetDate = new Date("December 31, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+            } else {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+            }
+        }
+
+        // প্রতি সেকেন্ডে কাউন্টডাউন আপডেট হবে
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
