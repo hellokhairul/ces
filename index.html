@@ -1,453 +1,393 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compact Engineering Solution - Coming Soon</title>
-
-    <!-- FontAwesome for Icons -->
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf2f4',
+                            100: '#fce7ea',
+                            500: '#d81b60',
+                            600: '#c2185b',
+                            700: '#b0124a',
+                            800: '#8c0f3a',
+                            900: '#680c2b',
+                        },
+                        dark: {
+                            800: '#1e2029',
+                            900: '#13151c',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary: #c2294e;
-            --primary-dark: #9e1c3b;
-            --secondary: #4a4a4a;
-            --bg-light: #f8f9fa;
-            --text-dark: #222222;
-            --white: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
-        }
-
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f1117;
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
 
-        /* Header / Branding */
-        header {
-            padding: 2rem 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: var(--white);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        /* Subtle Tech Grid Pattern Overlay */
+        .bg-tech-grid {
+            background-image: radial-gradient(rgba(216, 27, 96, 0.12) 1px, transparent 0);
+            background-size: 32px 32px;
         }
 
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            max-width: 1000px;
-            width: 100%;
+        /* Glow effects */
+        .glow-effect {
+            box-shadow: 0 0 35px -5px rgba(216, 27, 96, 0.3);
         }
 
-        .logo-img {
-            max-height: 90px;
-            width: auto;
+        .glow-text {
+            text-shadow: 0 0 20px rgba(216, 27, 96, 0.4);
         }
 
-        .brand-divider {
-            width: 2px;
-            height: 70px;
-            background-color: #ddd;
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .brand-text h1 {
-            color: var(--primary);
-            font-size: 1.8rem;
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: 0.5px;
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .brand-text p {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--secondary);
-            margin-top: 5px;
-            text-transform: uppercase;
+        .glass-card-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(216, 27, 96, 0.4);
+            transform: translateY(-4px);
         }
 
-        /* Main Content */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 1rem;
-            text-align: center;
+        /* Pulsing SVG animation for PCB lines */
+        @keyframes pulse-light {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; filter: drop-shadow(0 0 6px #d81b60); }
         }
 
-        .badge {
-            background: rgba(194, 41, 78, 0.1);
-            color: var(--primary);
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
+        .animate-pulse-light {
+            animation: pulse-light 3s infinite ease-in-out;
         }
 
-        .hero-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #111;
+        /* Gear slow rotation */
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 650px;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        /* Fixed Countdown Timer */
-        .countdown-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 3rem;
-        }
-
-        .time-box {
-            background: var(--white);
-            width: 90px;
-            height: 95px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            border-bottom: 4px solid var(--primary);
-        }
-
-        .time-box span.number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .time-box span.label {
-            font-size: 0.75rem;
-            color: #777;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        /* Services Section */
-        .services-section {
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 1rem;
-        }
-
-        .services-section h3 {
-            font-size: 1.4rem;
-            color: #333;
-            margin-bottom: 1.5rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
-            border: 1px solid #eee;
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-card i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .service-card h4 {
-            font-size: 1.1rem;
-            color: #222;
-            margin-bottom: 8px;
-        }
-
-        .service-card p {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.4;
-        }
-
-        /* Footer / Contact Information */
-        footer {
-            background: #1e1e1e;
-            color: #ffffff;
-            padding: 2.5rem 1rem;
-        }
-
-        .footer-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            text-align: left;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .contact-item i {
-            background: var(--primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .contact-item div h5 {
-            font-size: 0.95rem;
-            color: #aaa;
-            margin-bottom: 3px;
-            font-weight: 400;
-        }
-
-        .contact-item div p, .contact-item div a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            display: block;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #333;
-            font-size: 0.85rem;
-            color: #888;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .brand-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            .brand-divider {
-                width: 80px;
-                height: 2px;
-            }
-            .hero-title {
-                font-size: 2rem;
-            }
-            .countdown-container {
-                gap: 8px;
-            }
-            .time-box {
-                width: 70px;
-                height: 75px;
-            }
-            .time-box span.number {
-                font-size: 1.6rem;
-            }
-            .footer-container {
-                text-align: center;
-            }
-            .contact-item {
-                flex-direction: column;
-                align-items: center;
-            }
+        .animate-spin-slow {
+            animation: rotate-slow 25s linear infinite;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between bg-tech-grid text-slate-100 relative">
 
-    <!-- Header Section -->
-    <header>
-        <div class="brand-container">
-            <!-- Brand Logo Graphic -->
-            <svg class="logo-img" viewBox="0 0 200 200" width="90" height="90">
-                <path d="M100,20 L115,20 L120,35 L135,28 L145,40 L135,52 L148,62 L162,58 L168,72 L152,80 L160,95 L175,98 L172,113 L156,113 L158,128 L170,138 L160,150 L146,142 L138,155 L145,168 L132,175 L122,162 L108,170 L108,185 L92,185 L92,170 L78,162 L68,175 L55,168 L62,155 L54,142 L40,150 L30,138 L42,128 L44,113 L28,113 L25,98 L40,95 L48,80 L32,72 L38,58 L52,62 L65,52 L55,40 L65,28 L80,35 Z" fill="#666666"/>
-                <circle cx="100" cy="100" r="65" fill="#f8f9fa"/>
-                <path d="M100,45 C70,45 60,65 60,85 C60,105 75,118 80,128 L120,128 C125,118 140,105 140,85 C140,65 130,45 100,45 Z" fill="url(#bulbGrad)"/>
-                <rect x="82" y="132" width="36" height="8" rx="2" fill="#777777"/>
-                <rect x="85" y="142" width="30" height="6" rx="2" fill="#555555"/>
-                <path d="M88,150 Q100,156 112,150 L108,158 Q100,162 92,158 Z" fill="#333333"/>
-                <path d="M100,60 L100,110 M100,75 L85,65 M100,85 L115,75 M100,95 L85,105" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="85" cy="65" r="4" fill="#ffffff"/>
-                <circle cx="115" cy="75" r="4" fill="#ffffff"/>
-                <circle cx="85" cy="105" r="4" fill="#ffffff"/>
-                <defs>
-                    <linearGradient id="bulbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ff416c" />
-                        <stop offset="100%" stop-color="#c2294e" />
-                    </linearGradient>
-                </defs>
-            </svg>
+    <!-- Glowing Background Orbs -->
+    <div class="fixed top-1/4 -left-32 w-96 h-96 bg-brand-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-10 -right-32 w-96 h-96 bg-brand-800/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-            <div class="brand-divider"></div>
+    <header class="w-full py-6 px-4 sm:px-8 border-b border-white/10 glass-card z-20 sticky top-0">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Brand Logo & Title -->
+            <div class="flex items-center gap-4 sm:gap-5">
+                <!-- SVG Logo matching provided artwork -->
+                <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 flex items-center justify-center">
+                    <!-- Gear / Cog Outer Ring -->
+                    <svg class="absolute inset-0 w-full h-full text-slate-600 animate-spin-slow" viewBox="0 0 100 100" fill="currentColor">
+                        <path d="M50 20 C52 20 53 15 50 15 C47 15 48 20 50 20 Z M50 10 C53 10 55 0 50 0 C45 0 47 10 50 10 Z" />
+                        <path d="M50,5 L50,15 M20,50 L30,50 M50,85 L50,95 M80,50 L90,50" stroke="currentColor" stroke-width="4"/>
+                        <!-- Gear teeth polygon representation -->
+                        <path d="M42,2 A5,5 0 0,1 58,2 L60,12 A38,38 0 0,1 73,17 L82,10 A5,5 0 0,1 90,18 L83,27 A38,38 0 0,1 88,40 L98,42 A5,5 0 0,1 98,58 L88,60 A38,38 0 0,1 83,73 L90,82 A5,5 0 0,1 82,90 L73,83 A38,38 0 0,1 60,88 L58,98 A5,5 0 0,1 42,98 L40,88 A38,38 0 0,1 27,83 L18,90 A5,5 0 0,1 10,82 L17,73 A38,38 0 0,1 12,60 L2,58 A5,5 0 0,1 2,42 L12,40 A38,38 0 0,1 17,27 L10,18 A5,5 0 0,1 18,10 L27,17 A38,38 0 0,1 40,12 Z" fill="#475569"/>
+                        <circle cx="50" cy="50" r="30" fill="#0f1117" />
+                    </svg>
 
-            <div class="brand-text">
-                <h1>COMPACT ENGINEERING SOLUTION</h1>
-                <p>YOUR PRIORITY IS OUR RESPONSIBILITY</p>
+                    <!-- Inner Lightbulb with Circuit Board Pattern -->
+                    <svg class="relative z-10 w-10 h-10 sm:w-12 sm:h-12 animate-pulse-light" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Lightbulb Outer Shape -->
+                        <path d="M50 12C33.4 12 20 25.4 20 42C20 53.5 26.5 63.5 36 68.5V76C36 78.2 37.8 80 40 80H60C62.2 80 64 78.2 64 76V68.5C73.5 63.5 80 53.5 80 42C80 25.4 66.6 12 50 12Z" fill="url(#bulb-gradient)"/>
+                        <!-- Bulb Base -->
+                        <path d="M40 84H60V88H40V84ZM44 92H56V94H44V92Z" fill="#94A3B8"/>
+                        <!-- Tech Circuit Traces inside bulb -->
+                        <path d="M50 22V36M50 36L40 44M50 36L60 44M40 44V56M60 44V56M50 48V62" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="22" r="3.5" fill="#FFFFFF"/>
+                        <circle cx="40" cy="44" r="3.5" fill="#FFFFFF"/>
+                        <circle cx="60" cy="44" r="3.5" fill="#FFFFFF"/>
+                        <circle cx="40" cy="56" r="3.5" fill="#FFFFFF"/>
+                        <circle cx="60" cy="56" r="3.5" fill="#FFFFFF"/>
+                        <circle cx="50" cy="62" r="3.5" fill="#FFFFFF"/>
+                        <!-- Gradient Definition -->
+                        <defs>
+                            <linearGradient id="bulb-gradient" x1="20" y1="12" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#FF4081"/>
+                                <stop offset="100%" stop-color="#B0124A"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <!-- Title Header -->
+                <div class="text-center sm:text-left">
+                    <h1 class="font-heading font-black text-xl sm:text-2xl md:text-3xl tracking-wide uppercase text-white leading-none">
+                        COMPACT <span class="text-brand-500">ENGINEERING</span> SOLUTION
+                    </h1>
+                    <p class="text-xs sm:text-sm font-semibold tracking-widest text-slate-400 mt-1 uppercase">
+                        Your Priority Is Our Responsibility
+                    </p>
+                </div>
             </div>
+
+            <!-- Direct Quick Contact Pill -->
+            <a href="mailto:ilias_sf@yahoo.com" class="hidden lg:flex items-center gap-2 bg-white/5 hover:bg-brand-600/20 border border-white/10 hover:border-brand-500/50 px-4 py-2 rounded-full text-xs font-medium transition-all duration-300">
+                <i class="fa-solid me-1 fa-envelope text-brand-500"></i>
+                <span>ilias_sf@yahoo.com</span>
+            </a>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <div class="badge">
-            <i class="fa-solid fa-gears"></i> ওয়েবসাইট তৈরির কাজ চলছে
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 flex-grow flex flex-col justify-center">
+        <!-- Hero Text -->
+        <div class="text-center max-w-4xl mx-auto mb-12">
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-brand-500/10 border border-brand-500/30 text-brand-500 uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                We Are Launching Soon
+            </span>
+            <h2 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-6 leading-tight">
+                Engineering <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-pink-500 to-rose-400">Excellence</span> & Smart Tech Innovations
+            </h2>
+            <p class="text-slate-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                We are building a powerful digital experience to serve your industrial automation, tech, and engineering design needs. Stay tuned!
+            </p>
         </div>
 
-        <h2 class="hero-title">আমরা খুব শীঘ্রই আসছি!</h2>
-        <p class="hero-subtitle">
-            আমাদের অফিসিয়াল ওয়েবসাইট লঞ্চ করার প্রস্তুতি চলছে। যেকোনো প্রয়োজনে আমাদের সাথে সরাসরি যোগাযোগ করতে পারেন।
-        </p>
-
-        <!-- Fixed Target Countdown Timer -->
-        <div class="countdown-container">
-            <div class="time-box">
-                <span class="number" id="days">00</span>
-                <span class="label">দিন</span>
+        <!-- Animated Countdown Timer -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto w-full mb-16">
+            <div class="glass-card rounded-2xl p-4 sm:p-6 text-center border-t-2 border-t-brand-500">
+                <span id="days" class="font-heading font-extrabold text-3xl sm:text-5xl text-white block glow-text">00</span>
+                <span class="text-xs sm:text-sm font-medium text-slate-400 uppercase tracking-wider mt-1 block">Days</span>
             </div>
-            <div class="time-box">
-                <span class="number" id="hours">00</span>
-                <span class="label">ঘণ্টা</span>
+            <div class="glass-card rounded-2xl p-4 sm:p-6 text-center border-t-2 border-t-brand-500">
+                <span id="hours" class="font-heading font-extrabold text-3xl sm:text-5xl text-white block glow-text">00</span>
+                <span class="text-xs sm:text-sm font-medium text-slate-400 uppercase tracking-wider mt-1 block">Hours</span>
             </div>
-            <div class="time-box">
-                <span class="number" id="minutes">00</span>
-                <span class="label">মিনিট</span>
+            <div class="glass-card rounded-2xl p-4 sm:p-6 text-center border-t-2 border-t-brand-500">
+                <span id="minutes" class="font-heading font-extrabold text-3xl sm:text-5xl text-white block glow-text">00</span>
+                <span class="text-xs sm:text-sm font-medium text-slate-400 uppercase tracking-wider mt-1 block">Minutes</span>
             </div>
-            <div class="time-box">
-                <span class="number" id="seconds">00</span>
-                <span class="label">সেকেন্ড</span>
+            <div class="glass-card rounded-2xl p-4 sm:p-6 text-center border-t-2 border-t-brand-500">
+                <span id="seconds" class="font-heading font-extrabold text-3xl sm:text-5xl text-brand-500 block glow-text">00</span>
+                <span class="text-xs sm:text-sm font-medium text-slate-400 uppercase tracking-wider mt-1 block">Seconds</span>
             </div>
         </div>
 
-        <!-- Services Section -->
-        <section class="services-section">
-            <h3>আমাদের সেবাসমূহ</h3>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fa-solid fa-wrench"></i>
-                    <h4>Mechanical Support</h4>
-                    <p>মেকানিক্যাল ইঞ্জিনিয়ারিং সাপোর্ট এবং টেকনিক্যাল কনসালটেশন সার্ভিস।</p>
+        <div class="max-w-xl mx-auto w-full mb-20">
+            <div class="glass-card p-2 sm:p-3 rounded-2xl glow-effect">
+                <form id="subscribe-form" onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row gap-2">
+                    <div class="relative flex-grow">
+                        <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="email" id="email-input" required placeholder="Enter your business email address..." 
+                            class="w-full bg-slate-900/80 text-white placeholder-slate-500 text-sm rounded-xl pl-11 pr-4 py-3.5 outline-none border border-slate-700/60 focus:border-brand-500 transition-colors">
+                    </div>
+                    <button type="submit" class="bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-700 hover:to-brand-600 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2 whitespace-nowrap">
+                        <span>Get Notified</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+            </div>
+            <!-- Status message container -->
+            <div id="form-message" class="hidden mt-3 text-center text-sm font-medium p-3 rounded-xl"></div>
+        </div>
+
+        <div class="mt-8">
+            <h3 class="text-center font-heading font-bold text-xl sm:text-2xl text-white uppercase tracking-wider mb-8">
+                Our Specialized Solutions
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 text-xl mb-4">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-lg text-white mb-2">Industrial Automation</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Advanced control systems, PLC programming, and circuit optimizations for seamless factory operations.</p>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-industry"></i>
-                    <h4>SS Fabrication</h4>
-                    <p>এসএস (Stainless Steel) এর পণ্য ও মালামাল প্রস্তুতকরণ এবং কাস্টম মেটাল ফেব্রিকেশন।</p>
+
+                <!-- Card 2: New Mechanical Engineering -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 text-xl mb-4">
+                            <i class="fa-solid fa-cogs"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-lg text-white mb-2">Mechanical Engineering</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Precision mechanical design, robust machinery setup, and customized heavy equipment engineering solutions.</p>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                    <h4>Engineering Solutions</h4>
-                    <p>ইন্ডাস্ট্রিয়াল সাপোর্ট, মেকানিক্যাল সলিউশন ও ইকুইপমেন্ট মেইনটেন্যান্স।</p>
+
+                <!-- Card 3: New SS Material Fabrication -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 text-xl mb-4">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-lg text-white mb-2">SS Material Fabrication</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">High-quality custom stainless steel (SS) product manufacturing, structural framework, and fabrication works.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4: New 24/7 Support -->
+                <div class="glass-card glass-card-hover rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 text-xl mb-4">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-lg text-white mb-2">24/7 Support</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">Round-the-clock technical support, rapid troubleshooting, and reliable scheduled maintenance services.</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Footer / Contact Info -->
-    <footer>
-        <div class="footer-container">
-            <!-- Email -->
-            <div class="contact-item">
-                <i class="fa-solid fa-envelope"></i>
-                <div>
-                    <h5>ইমেইল করুন</h5>
-                    <a href="mailto:ilias_sf@yahoo.com">ilias_sf@yahoo.com</a>
+    <footer class="w-full border-t border-white/10 glass-card mt-16 py-10 px-4 sm:px-8 z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-white/10">
+                
+                <!-- Contact Item 1: Email -->
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 text-lg flex-shrink-0">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-1">Email Us</h5>
+                        <a href="mailto:ilias_sf@yahoo.com" class="text-white hover:text-brand-500 transition-colors font-medium text-sm sm:text-base block">
+                            ilias_sf@yahoo.com
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Contact Item 2: Phone -->
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 text-lg flex-shrink-0">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-1">Call Support</h5>
+                        <a href="tel:+8801766667378" class="text-white hover:text-brand-500 transition-colors font-medium text-sm sm:text-base block">
+                            +880 1766-667378
+                        </a>
+                        <a href="tel:+8801715030146" class="text-white hover:text-brand-500 transition-colors font-medium text-sm sm:text-base block mt-0.5">
+                            +880 1715-030146
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Item 3: Address -->
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-500 text-lg flex-shrink-0">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <h5 class="text-xs uppercase font-semibold text-slate-400 tracking-wider mb-1">Office Location</h5>
+                        <p class="text-white font-medium text-sm sm:text-base leading-snug">
+                            House: 430, Road: 30,<br>
+                            Mohakhali DOHS, Dhaka-1206, Bangladesh
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Phone -->
-            <div class="contact-item">
-                <i class="fa-solid fa-phone"></i>
-                <div>
-                    <h5>ফোন নম্বর</h5>
-                    <a href="tel:+8801766667378">+880 1766-667378</a>
-                    <a href="tel:+8801715030146">+880 1715-030146</a>
+            <!-- Footer Bottom: Copyright & Social Links -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+                <p>&copy; <span id="year"></span> <strong>COMPACT ENGINEERING SOLUTION</strong>. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="#" aria-label="Facebook" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:border-brand-500 hover:text-brand-500 flex items-center justify-center transition-all">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:border-brand-500 hover:text-brand-500 flex items-center justify-center transition-all">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/8801766667378" target="_blank" aria-label="WhatsApp" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:border-brand-500 hover:text-brand-500 flex items-center justify-center transition-all">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
                 </div>
             </div>
-
-            <!-- Address -->
-            <div class="contact-item">
-                <i class="fa-solid fa-location-dot"></i>
-                <div>
-                    <h5>ঠিকানা</h5>
-                    <p>House: 430, Road: 30,<br>Mohakhali DOHS, Dhaka-1206.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="copyright">
-            &copy; COMPACT ENGINEERING SOLUTION. All Rights Reserved.
         </div>
     </footer>
 
-    <!-- Fixed Countdown Script -->
     <script>
-        // নির্দিষ্ট টার্গেট ডেট (এখানে ৩১ ডিসেম্বর ২০২৬ ফিক্সড রাখা হয়েছে)
-        const targetDate = new Date("December 31, 2026 00:00:00").getTime();
+        // Set dynamic copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Target launch date: Fixed to December 31, 2026
+        const launchDate = new Date("December 31, 2026 23:59:59").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
-            const difference = targetDate - now;
+            const distance = launchDate - now;
 
-            if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-            } else {
-                document.getElementById('days').innerText = '00';
-                document.getElementById('hours').innerText = '00';
-                document.getElementById('minutes').innerText = '00';
-                document.getElementById('seconds').innerText = '00';
+            if (distance < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
             }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
         }
 
-        // প্রতি সেকেন্ডে কাউন্টডাউন আপডেট হবে
         setInterval(updateCountdown, 1000);
         updateCountdown();
+
+        // Handle Email Subscription Form
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('email-input');
+            const messageBox = document.getElementById('form-message');
+            const email = emailInput.value.trim();
+
+            if (email) {
+                messageBox.className = "mt-3 text-center text-sm font-medium p-3 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                messageBox.textContent = `Thank you! We will notify you at (${email}) when we launch.`;
+                messageBox.classList.remove('hidden');
+                emailInput.value = '';
+
+                setTimeout(() => {
+                    messageBox.classList.add('hidden');
+                }, 5000);
+            }
+        }
     </script>
 </body>
 </html>
